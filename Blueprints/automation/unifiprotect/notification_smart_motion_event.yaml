@@ -85,7 +85,7 @@ blueprint:
         "Pink" if action is triggered manually.
         https://companion.home-assistant.io/docs/notifications/notifications-basic/#notification-color
         https://companion.home-assistant.io/docs/notifications/notifications-basic/#notification-led-color
-      default: Smart Detection
+      default: red
       selector:
         text:
     time_format:
