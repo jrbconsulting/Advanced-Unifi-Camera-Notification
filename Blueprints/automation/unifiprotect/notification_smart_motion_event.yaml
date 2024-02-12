@@ -216,6 +216,7 @@ action:
         tag: "{{ notification_tag }}"
         # Android notification Channel
         channel: "{{ notification_channel }}"
+        group: "{{ notification_channel }}"
         # Android notification Colour
         color: "{{ notification_color }}"
         ledColor: "{{ notification_color }}"
@@ -263,6 +264,7 @@ action:
                 tag: "{{ notification_tag }}"
                 # Android notification Channel
                 channel: "{{ notification_channel }}"
+                group: "{{ notification_channel }}"
                 # Android notification Colour
                 color: "{{ notification_color }}"
                 ledColor: "{{ notification_color }}"
