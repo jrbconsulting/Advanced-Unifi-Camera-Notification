@@ -167,7 +167,7 @@ variables:
   input_presence_filter: !input presence_filter
   input_debug_event_id: !input debug_event_id
   input_cooldown: !input cooldown
-  input_icon: !input icon
+  notification_icon: !input icon
   lovelace_view: "{{ input_lovelace_view | trim }}"
   is_manual: "{{ 'from_state' not in trigger }}"
   entity_id: "{% if is_manual %}{{ input_obj[0] }}{% else %}{{ trigger.entity_id }}{% endif %}"
@@ -204,12 +204,6 @@ variables:
       None
     {% else %}
       {{ lovelace_view }}
-    {% endif %}
-  notification_icon: |
-    {% if input_icon == "" %}
-      None
-    {% else %}
-      {{ input_icon }}
     {% endif %}
   silence_action: "silence-smart-{{ entity_id }}"
 
@@ -257,7 +251,7 @@ action:
           {% if input_silence_timer > 0 %}
           { "action": "{{ silence_action }}", "title": "Silence", "destructive": True },
           {% endif %}]
-    - wait_for_trigger:
+  - wait_for_trigger:
       - platform: event
         event_type: mobile_app_notification_action
         event_data:
@@ -310,7 +304,7 @@ action:
                   {% if input_silence_timer > 0 %}
                   { "action": "{{ silence_action }}", "title": "Silence", "destructive": True },
                   {% endif %}]
-            - wait_for_trigger:
+          - wait_for_trigger:
               - platform: event
                 event_type: mobile_app_notification_action
                 event_data:
