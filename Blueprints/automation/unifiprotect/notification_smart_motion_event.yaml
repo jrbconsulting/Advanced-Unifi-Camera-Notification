@@ -254,8 +254,8 @@ action:
           {% endif %}
           {% if input_silence_timer > 0 %}
           { "action": "{{ silence_action }}", "title": "Silence", "destructive": True },
-          {% endif %}]
-          [{% if notification_icon != None %}
+          {% endif %}
+          {% if notification_icon != None %}
           { "icon_url": "{{ notification_icon }}" },
           {% endif %}]
   - wait_for_trigger:
@@ -308,8 +308,8 @@ action:
                   {% endif %}
                   {% if input_silence_timer > 0 %}
                   { "action": "{{ silence_action }}", "title": "Silence", "destructive": True },
-                  {% endif %}]
-                  [{% if notification_icon != None %}
+                  {% endif %}
+                  {% if notification_icon != None %}
                   { "icon_url": "{{ notification_icon }}" },
                   {% endif %}]
          - wait_for_trigger:
