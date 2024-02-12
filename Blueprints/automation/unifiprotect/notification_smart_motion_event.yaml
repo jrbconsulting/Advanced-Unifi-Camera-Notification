@@ -82,13 +82,13 @@ blueprint:
       name: (Optional) Notification Color
       description: >
         Notification colour to use. Will automatically be prepended with
-        "Pink" if action is triggered manually.
+        Pink if action is triggered manually.
         https://companion.home-assistant.io/docs/notifications/notifications-basic/#notification-color
         https://companion.home-assistant.io/docs/notifications/notifications-basic/#notification-led-color
       default: red
       selector:
         text:
-    icon:
+    notificationicon:
       name: (Optional) Notification Icon
       description: |
         Icon to use for notification
@@ -152,6 +152,7 @@ blueprint:
       selector:
         text:
 
+
 mode: single
 max_exceeded: silent
 
@@ -167,7 +168,6 @@ variables:
   input_presence_filter: !input presence_filter
   input_debug_event_id: !input debug_event_id
   input_cooldown: !input cooldown
-  notification_icon: !input icon
   lovelace_view: "{{ input_lovelace_view | trim }}"
   is_manual: "{{ 'from_state' not in trigger }}"
   entity_id: "{% if is_manual %}{{ input_obj[0] }}{% else %}{{ trigger.entity_id }}{% endif %}"
@@ -205,6 +205,7 @@ variables:
     {% else %}
       {{ lovelace_view }}
     {% endif %}
+  notification_icon: !input notificationicon
   silence_action: "silence-smart-{{ entity_id }}"
 
 trigger:
@@ -232,14 +233,14 @@ action:
         ledColor: "{{ notification_color }}"
         # Show in Android auto
         car_ui: true
-        # Android high prority
-        ttl: 0
-        priority: high
         # Icon URL
         icon_url: notification_icon
         # Notification Bar Icon
         notification_icon: "mdi:cctv"
-       # iOS high prority
+        # Android high prority
+        ttl: 0
+        priority: high
+        # iOS high prority
         time-sensitive: 1
         image: "{{ notification_image }}"
         # only for iOS
@@ -265,7 +266,7 @@ action:
         to: "off"
     timeout:
       seconds: "{{ input_cooldown }}"
-      continue_on_timeout: false
+    continue_on_timeout: false
   - choose:
       - conditions:
           - condition: template
@@ -311,7 +312,7 @@ action:
                   action: "{{ silence_action }}"
             timeout:
               seconds: "{{ max([input_cooldown - (states[entity_id].last_changed - as_datetime(video_start)).total_seconds(), 5]) }}"
-              continue_on_timeout: false
+            continue_on_timeout: false
       - conditions:
           - condition: template
             value_template: "{{ wait.trigger.platform == 'event' and wait.trigger.event.event_type == 'mobile_app_notification_action' }}"
