@@ -256,7 +256,7 @@ action:
           { "action": "{{ silence_action }}", "title": "Silence", "destructive": True },
           {% endif %}]
           [{% if notification_icon != None %}
-          { "icon_url": "https://github.com/jrbconsulting/Home-Assistant/blob/main/Blueprints/automation/unifiprotect/unifi-icon.jpg" },
+          { "icon_url": "{{ notification_icon }}" },
           {% endif %}]
   - wait_for_trigger:
       - platform: event
@@ -310,7 +310,7 @@ action:
                   { "action": "{{ silence_action }}", "title": "Silence", "destructive": True },
                   {% endif %}]
                   [{% if notification_icon != None %}
-                  { "icon_url": "https://github.com/jrbconsulting/Home-Assistant/blob/main/Blueprints/automation/unifiprotect/unifi-icon.jpg" },
+                  { "icon_url": "{{ notification_icon }}" },
                   {% endif %}]
          - wait_for_trigger:
               - platform: event
