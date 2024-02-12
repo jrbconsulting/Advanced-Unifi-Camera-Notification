@@ -94,7 +94,7 @@ blueprint:
         Icon to use for notification
         If left blank, will use standard HA Icon.
         This should be a URL relating to your installation or a publically accesable file ie. https://github.com/jrbconsulting/Home-Assistant/blob/main/Blueprints/automation/unifiprotect/unifi-icon.jpg
-      default: "https://github.com/jrbconsulting/Home-Assistant/blob/main/Blueprints/automation/unifiprotect/unifi-icon.jpg"
+      default: ""
       selector:
         text:
     time_format:
@@ -241,6 +241,8 @@ action:
         # Android high prority
         ttl: 0
         priority: high
+        # Icon URL
+        icon_url: notification_icon
         # Notification Bar Icon
         notification_icon: "mdi:cctv"
        # iOS high prority
@@ -254,11 +256,8 @@ action:
           {% endif %}
           {% if input_silence_timer > 0 %}
           { "action": "{{ silence_action }}", "title": "Silence", "destructive": True },
-          {% endif %}
-          {% if notification_icon != None %}
-          { "icon_url": "{{ notification_icon }}" },
           {% endif %}]
-  - wait_for_trigger:
+    - wait_for_trigger:
       - platform: event
         event_type: mobile_app_notification_action
         event_data:
@@ -272,7 +271,7 @@ action:
         to: "off"
     timeout:
       seconds: "{{ input_cooldown }}"
-    continue_on_timeout: false
+      continue_on_timeout: false
   - choose:
       - conditions:
           - condition: template
@@ -293,6 +292,8 @@ action:
                 ledColor: "{{ notification_color }}"
                 # Show in Android auto
                 car_ui: true
+                # Icon URL
+                icon_url: notification_icon
                 # Notification Bar Icon
                 notification_icon: "mdi:cctv"
                 # Android high prority
@@ -308,18 +309,15 @@ action:
                   {% endif %}
                   {% if input_silence_timer > 0 %}
                   { "action": "{{ silence_action }}", "title": "Silence", "destructive": True },
-                  {% endif %}
-                  {% if notification_icon != None %}
-                  { "icon_url": "{{ notification_icon }}" },
                   {% endif %}]
-         - wait_for_trigger:
+            - wait_for_trigger:
               - platform: event
                 event_type: mobile_app_notification_action
                 event_data:
                   action: "{{ silence_action }}"
             timeout:
               seconds: "{{ max([input_cooldown - (states[entity_id].last_changed - as_datetime(video_start)).total_seconds(), 5]) }}"
-            continue_on_timeout: false
+              continue_on_timeout: false
       - conditions:
           - condition: template
             value_template: "{{ wait.trigger.platform == 'event' and wait.trigger.event.event_type == 'mobile_app_notification_action' }}"
