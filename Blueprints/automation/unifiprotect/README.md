@@ -3,6 +3,8 @@
 This blueprint will send push notifications to a Home Assistant mobile app when a camera detections motion or a
 smart detection.
 
+[![Add Blueprint to your HA](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fraw.githubusercontent.com%2Fjrbconsulting%2FHome-Assistant%2Fblob%2Fmain%2FBlueprints%2Fautomation%2Funifiprotect%2Fnotification_smart_motion_event.yaml)
+
 ## Required Settings
 
 - UniFi Protect Smart Detection enabled camera or sensor
