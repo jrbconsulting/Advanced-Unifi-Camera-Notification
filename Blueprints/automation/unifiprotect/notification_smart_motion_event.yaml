@@ -223,8 +223,8 @@ action:
       message: "{{ notification_message }}"
       title: "{{ notification_title }}"
       data:
-        # Android/iOS notification tag
-        tag: "{{ notification_tag }}"
+        # Android/iOS notification tag - I'm removing as I don't want it to replace the previous notification
+        #tag: "{{ notification_tag }}"
         # Android notification Channel
         channel: "{{ notification_channel }}"
         group: "{{ notification_channel }}"
@@ -277,8 +277,8 @@ action:
               message: "{{ notification_message }}"
               title: "{{ notification_title }}"
               data:
-                # Android/iOS notification tag
-                tag: "{{ notification_tag }}"
+                # Android/iOS notification tag - I'm removing as I don't want it to replace the previous notification
+                #tag: "{{ notification_tag }}"
                 # Android notification Channel
                 channel: "{{ notification_channel }}"
                 group: "{{ notification_channel }}"
