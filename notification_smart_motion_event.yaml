@@ -127,7 +127,6 @@ blueprint:
       default: ""
       selector:
         text:
-          multiline: true
 
     time_format:
       name: (Optional) Time Format String
