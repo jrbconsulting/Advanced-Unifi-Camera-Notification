@@ -124,6 +124,7 @@ blueprint:
       name: Prompt to use with Google AI
       description: >
         This prompt will tell the Google AI what you would like to know about your images and any parameters around describing the image.
+      default: ""
       selector:
         text:
           multiline: true
