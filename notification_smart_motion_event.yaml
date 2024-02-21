@@ -255,16 +255,16 @@ condition:
       - "{{ not input_alarm_control or (input_alarm_control | select('is_state', 'disarmed') | list | count) == 0 }}"    
 
 action:
-  - if:
-      - condition: state
-        entity_id: !input enable_google_ai_summary
-        state: "on"
-    then:
-      - service: google_generative_ai_conversation.generate_content
-        data:
-          prompt: "{{ google_ai_summary_prompt }}"
-          image_filename: "{{ notification_image }}"
-        response_variable: google_ai_response
+#  - if:
+#      - condition: state
+#        entity_id: !input enable_google_ai_summary
+#        state: "on"
+#    then:
+#      - service: google_generative_ai_conversation.generate_content
+#        data:
+#          prompt: "{{ google_ai_summary_prompt }}"
+#          image_filename: "{{ notification_image }}"
+#        response_variable: google_ai_response
   - service: "{{ input_notify_target_app }}"
     data:
       message: "{{ notification_message }}"
