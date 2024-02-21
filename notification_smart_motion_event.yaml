@@ -54,7 +54,8 @@ blueprint:
           multiple: true
     presence_filter:
       name: (Optional) Enable Presence detection?
-      description: If you would like this Blueprint to only send notifications when you are away from home (presence), enable this option.
+      description: >
+      If you would like this Blueprint to only send notifications when you are away from home (presence), enable this option.
       If you find that you are having issues with the notifications firing, ensure that either Presence detection or Alarm Control Panel are set; not both.
       Choose the entities that you would like to track the location of.
       default: ""
@@ -64,7 +65,8 @@ blueprint:
           multiple: true
     alarm_control:
       name: (Optional) Enable Alarm Control Panel?
-      description: If you would like this Blueprint to only send notifications when you have the Alarm Control panel "Armed", enable this option.
+      description: >
+      If you would like this Blueprint to only send notifications when you have the Alarm Control panel "Armed", enable this option.
       If you find that you are having issues with the notifications firing, ensure that either Presence detection or Alarm Control Panel are enabled; not both.
       If you do not have an existing Alarm Panel installed, Alarmo is a great free option to create a virtual alarm for all your sensors.
       Choose the entities that you would like to track the "Armed" status of.
