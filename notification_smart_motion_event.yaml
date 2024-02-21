@@ -54,7 +54,7 @@ blueprint:
           multiple: true
     presence_filter:
       name: (Optional) Enable Presence detection
-      description: |
+      description: >
         If you would like this Blueprint to only send notifications when you are away from home (presence), enable this option.
         If you find that you are having issues with the notifications firing, ensure that either Presence detection or Alarm Control Panel are set; not both.
         Choose the entities that you would like to track the location of.
@@ -65,7 +65,7 @@ blueprint:
           multiple: true
     alarm_control:
       name: (Optional) Enable Alarm Control Panel
-      description: |
+      description: >
         If you would like this Blueprint to only send notifications when you have the Alarm Control panel "Armed", enable this option.
         If you find that you are having issues with the notifications firing, ensure that either Presence detection or Alarm Control Panel are enabled; not both.
         If you do not have an existing Alarm Panel installed, Alarmo is a great free option to create a virtual alarm for all your sensors.
@@ -113,15 +113,17 @@ blueprint:
       selector:
         text:
     enable_google_ai_summary:
-      name: (Optional) Enable Google AI Summary?
-      description: Google has a great feature where it will analyse the content of the image sent to it and present a description.
-      This is NOT local, and can be hit and miss. It may also delay notifications by an unknown amount of time.
+      name: (Optional) Enable Google AI Summary
+      description: >
+        Google has a great feature where it will analyse the content of the image sent to it and present a description.
+        This is NOT local, and can be hit and miss. It may also delay notifications by an unknown amount of time.
       default: false
       selector:
         boolean:
     google_ai_summary_prompt:
-      name: Prompt to use with Google AI?
-      description: This prompt will tell the Google AI what you would like to know about your images and any parameters around describing the image.
+      name: Prompt to use with Google AI
+      description: >
+        This prompt will tell the Google AI what you would like to know about your images and any parameters around describing the image.
       selector:
         text:
           multiline: true
