@@ -63,18 +63,18 @@ blueprint:
         entity:
           domain: device_tracker
           multiple: true
-#    alarm_control:
-#      name: (Optional) Enable Alarm Control Panel
-#      description: >
-#        If you would like this Blueprint to only send notifications when you have the Alarm Control panel "Armed", enable this option.
-#        If you find that you are having issues with the notifications firing, ensure that either Presence detection or Alarm Control Panel are enabled; not both.
-#        If you do not have an existing Alarm Panel installed, Alarmo is a great free option to create a virtual alarm for all your sensors.
-#        Choose the entities that you would like to track the "Armed" status of.
-#      default: ""
-#      selector:
-#        entity:
-#          domain: alarm_control_panel
-#          multiple: true
+    alarm_control:
+      name: (Optional) Enable Alarm Control Panel
+      description: >
+        If you would like this Blueprint to only send notifications when you have the Alarm Control panel "Armed", enable this option.
+        If you find that you are having issues with the notifications firing, ensure that either Presence detection or Alarm Control Panel are enabled; not both.
+        If you do not have an existing Alarm Panel installed, Alarmo is a great free option to create a virtual alarm for all your sensors.
+        Choose the entities that you would like to track the "Armed" status of.
+      default: ""
+      selector:
+        entity:
+          domain: alarm_control_panel
+          multiple: true
     notify_target_app:
       name: (Optional) Notification Target (Mobile App)
       description: >
@@ -249,10 +249,10 @@ trigger:
     to: "on"
 
 condition:
-#  - condition: or
-#    conditions:
-  - "{{ not input_presence_filter or (input_presence_filter | select('is_state', 'home') | list | count) == 0 }}"
-#      - "{{ not input_alarm_control or (input_alarm_control | select('is_state', 'disarmed') | list | count) == 0 }}"    
+  - condition: or
+    conditions:
+      - "{{ not input_presence_filter or (input_presence_filter | select('is_state', 'home') | list | count) == 0 }}"
+      - "{{ not input_alarm_control or (input_alarm_control | select('is_state', 'disarmed') | list | count) == 0 }}"    
 
 action:
 #  - if:
