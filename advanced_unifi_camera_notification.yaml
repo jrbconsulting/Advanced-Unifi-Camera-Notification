@@ -265,10 +265,9 @@ action:
 
   - service: "{{ input_notify_target_app }}"
     data:
-      message: >
-        {{ notification_message }}: {{ google_ai_response['text'] }}
-      title: >
-        {{ notification_title }}: {{ google_ai_response['text'] }}
+      #message: "{{ notification_message }}"
+      message: "\"{{ google_ai_response['text'] }}\""
+      title: "{{ notification_title }}"
       data:
         # Android/iOS notification tag
         #tag: "{{ notification_tag }}"
@@ -321,10 +320,9 @@ action:
         sequence:
           - service: "{{ input_notify_target_app }}"
             data:
-              message: >
-                {{ notification_message }}: {{ google_ai_response['text'] }}
-              title: >
-                {{ notification_title }}: {{ google_ai_response['text'] }}
+              #message: "{{ notification_message }}"
+              message: "\"{{ google_ai_response['text'] }}\""
+              title: "{{ notification_title }}"
               data:
                 # Android/iOS notification tag
                 #tag: "{{ notification_tag }}"
