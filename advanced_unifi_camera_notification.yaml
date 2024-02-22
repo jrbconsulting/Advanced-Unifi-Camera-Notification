@@ -257,8 +257,10 @@ action:
 
   - service: "{{ input_notify_target_app }}"
     data:
-      message: "{{ notification_message }}"
-      title: "{{ notification_title }}"
+      message: >
+        {{ notification_message }}: : {{ google_ai_response }}
+      title: >
+        {{ notification_title }}: {{ google_ai_response }}
       data:
         # Android/iOS notification tag
         tag: "{{ notification_tag }}"
