@@ -189,6 +189,7 @@ variables:
   # input vars
   input_obj: !input obj_sensor
   input_channel: !input channel
+  input_color: !input color
   input_lovelace_view: !input lovelace_view
   input_notify_target_app: !input notify_target_app
   input_silence_timer: !input silence_timer
@@ -220,6 +221,12 @@ variables:
     {% else %}
       {{ input_channel }}
     {% endif %}
+  notification_color: |
+    {% if is_manual %}
+      pink
+    {% else %}
+      {{ input_color }}
+    {% endif %}    
   notification_title: "{{ entity_name }}"
   notification_tag: "{{ notification_channel.lower().replace(' ', '-') }}"
   notification_message: "{{ entity_name }}{% if trigger_time != None %} at {{ trigger_time }}{% endif %}."
@@ -230,6 +237,7 @@ variables:
     {% else %}
       {{ lovelace_view }}
     {% endif %}
+  notification_icon: !input notificationicon
   silence_action: "silence-smart-{{ entity_id }}"
 
 trigger:
@@ -258,14 +266,24 @@ action:
   - service: "{{ input_notify_target_app }}"
     data:
       message: >
-        {{ notification_message }}: : {{ google_ai_response }}
+        {{ notification_message }}:  {{ google_ai_response }}
       title: >
         {{ notification_title }}: {{ google_ai_response }}
       data:
         # Android/iOS notification tag
-        tag: "{{ notification_tag }}"
+        #tag: "{{ notification_tag }}"
         # Android notification Channel
         channel: "{{ notification_channel }}"
+        group: "{{ notification_channel }}"
+        # Android notification Colour
+        color: "{{ notification_color }}"
+        ledColor: "{{ notification_color }}"
+        # Show in Android auto
+        car_ui: true
+        # Icon URL
+        icon_url: notification_icon
+        # Notification Bar Icon
+        notification_icon: "mdi:cctv"
         # Android high prority
         ttl: 0
         priority: high
@@ -307,9 +325,19 @@ action:
               title: "{{ notification_title }}"
               data:
                 # Android/iOS notification tag
-                tag: "{{ notification_tag }}"
+                #tag: "{{ notification_tag }}"
                 # Android notification Channel
                 channel: "{{ notification_channel }}"
+                group: "{{ notification_channel }}"
+                # Android notification Colour
+                color: "{{ notification_color }}"
+                ledColor: "{{ notification_color }}"
+                # Show in Android auto
+                car_ui: true
+                # Icon URL
+                icon_url: notification_icon
+                # Notification Bar Icon
+                notification_icon: "mdi:cctv"
                 # Android high prority
                 ttl: 0
                 priority: high
