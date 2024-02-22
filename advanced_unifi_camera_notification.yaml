@@ -267,7 +267,7 @@ action:
   - service: "{{ input_notify_target_app }}"
     data:
       #message: "{{ notification_message }}"
-      message: "{{ generated_content.text }}"
+      message: "{{ generated_content }}"
       title: "{{ notification_title }}"
       data:
         # Android/iOS notification tag
@@ -321,7 +321,7 @@ action:
         sequence:
           - service: "{{ input_notify_target_app }}"
             data:
-              message: "{{ generated_content.text }}"
+              message: "{{ generated_content }}"
               title: >
                 {{ notification_title }}
               data:
