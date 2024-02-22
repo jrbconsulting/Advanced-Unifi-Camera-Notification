@@ -323,7 +323,7 @@ action:
               #message: "{{ notification_message }}"
               message: " {{ generated_content.text }} "
               title: "{{ notification_title }}"
-             data:
+              data:
                 # Android/iOS notification tag
                 #tag: "{{ notification_tag }}"
                 # Android notification Channel
