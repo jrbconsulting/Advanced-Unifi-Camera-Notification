@@ -200,6 +200,7 @@ variables:
   input_google_ai_summary_prompt: !input google_ai_summary_prompt
   input_debug_event_id: !input debug_event_id
   input_cooldown: !input cooldown
+  generated_content: "None"
   lovelace_view: "{{ input_lovelace_view | trim }}"
   is_manual: "{{ 'from_state' not in trigger }}"
   entity_id: "{% if is_manual %}{{ input_obj[0] }}{% else %}{{ trigger.entity_id }}{% endif %}"
