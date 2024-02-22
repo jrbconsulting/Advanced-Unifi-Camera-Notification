@@ -261,12 +261,12 @@ action:
         data:
           prompt: "{{ google_ai_summary_prompt }}"
           image_filename: "{{ notification_image }}"
-        response_variable: google_ai_response
+        response_variable: generated_content
 
   - service: "{{ input_notify_target_app }}"
     data:
       #message: "{{ notification_message }}"
-      message: "\"{{ google_ai_response['text'] }}\""
+      message: "{{ generated_content['text'] }}"
       title: "{{ notification_title }}"
       data:
         # Android/iOS notification tag
@@ -321,9 +321,9 @@ action:
           - service: "{{ input_notify_target_app }}"
             data:
               #message: "{{ notification_message }}"
-              message: "\"{{ google_ai_response['text'] }}\""
+              message: "{{ generated_content['text'] }}"
               title: "{{ notification_title }}"
-              data:
+             data:
                 # Android/iOS notification tag
                 #tag: "{{ notification_tag }}"
                 # Android notification Channel
