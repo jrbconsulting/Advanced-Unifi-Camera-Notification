@@ -1,7 +1,7 @@
 blueprint:
   name: UniFi Protect Motion / Smart Detection Notifications
   domain: automation
-  source_url: https://raw.githubusercontent.com/jrbconsulting/Advanced-Unifi-Camera-Notification/main/notification_smart_motion_event.yaml
+  source_url: https://raw.githubusercontent.com/jrbconsulting/Advanced-Unifi-Camera-Notification/main/advanced_unifi_camera_notification.yaml
   description: |
     ## UniFi Protect Motion / Smart Detection Notifications
 
