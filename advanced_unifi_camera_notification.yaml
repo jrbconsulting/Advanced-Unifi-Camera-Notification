@@ -129,14 +129,6 @@ blueprint:
       selector:
         text:
           multiline: True        
-    generated_content:
-      name: Holder for the response from Google AI
-      description: |
-        No need to touch this. Just testing
-      default: "None"
-      selector:
-        text:
-          multiline: True        
     time_format:
       name: (Optional) Time Format String
       description: >
@@ -208,7 +200,6 @@ variables:
   input_google_ai_summary_prompt: !input google_ai_summary_prompt
   input_debug_event_id: !input debug_event_id
   input_cooldown: !input cooldown
-  input_generated_content: !input generated_content
   lovelace_view: "{{ input_lovelace_view | trim }}"
   is_manual: "{{ 'from_state' not in trigger }}"
   entity_id: "{% if is_manual %}{{ input_obj[0] }}{% else %}{{ trigger.entity_id }}{% endif %}"
@@ -270,12 +261,11 @@ action:
         data:
           prompt: "{{ google_ai_summary_prompt }}"
           image_filename: "{{ notification_image }}"
-        response_variable: !input generated_content
+        response_variable: generated_content
 
   - service: "{{ input_notify_target_app }}"
     data:
-      #message: "{{ notification_message }}"
-      message: "{{ input_generated_content }}"
+      message: "{{ notification_message }}"
       title: "{{ notification_title }}"
       data:
         # Android/iOS notification tag
@@ -329,7 +319,7 @@ action:
         sequence:
           - service: "{{ input_notify_target_app }}"
             data:
-              message: "{{ input_generated_content }}"
+              message: "{{ notification_message }}"
               title: >
                 {{ notification_title }}
               data:
