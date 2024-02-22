@@ -108,8 +108,8 @@ blueprint:
       description: |
         Icon to use for notification
         If left blank, will use standard HA Icon.
-        This should be a URL relating to your installation or a publically accesable file ie. https://github.com/jrbconsulting/Home-Assistant/blob/main/Blueprints/automation/unifiprotect/unifi-icon.jpg
-      default: ""
+        This should be a URL relating to your installation or a publically accesable file ie. https://github.com/jrbconsulting/Advanced-Unifi-Camera-Notification/blob/main/unifi-icon.jpg
+      default: "https://github.com/jrbconsulting/Advanced-Unifi-Camera-Notification/blob/main/unifi-icon.jpg"
       selector:
         text:
     enable_google_ai_summary:
