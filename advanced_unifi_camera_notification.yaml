@@ -45,7 +45,7 @@ blueprint:
   input:
     obj_sensor:
       name: Detection Sensor
-      description: >
+      description: |
         The "Motion/Person/etc. Detected" sensor(s) to use.
       selector:
         entity:
@@ -62,9 +62,10 @@ blueprint:
           multiple: true
     alarm_control:
       name: (Optional) Alarm Control Panel
-      description: Only notify if selected Alarm entity is "Armed".
-      This setting will be used as an "OR" alongside the Presence Filter above.
-      We highly recommend the Alarmo add-on for use with this.
+      description: |
+        Only notify if selected Alarm entity is "Armed".
+        This setting will be used as an "OR" alongside the Presence Filter above.
+        We highly recommend the Alarmo add-on for use with this.
       default: ""
       selector:
         entity:
@@ -72,7 +73,7 @@ blueprint:
           multiple: true
     notify_target_app:
       name: (Optional) Notification Target (Mobile App)
-      description: >
+      description: |
         The notification target for mobile apps notifications. Can be `notifiy.notify` or any Mobile app notify service
         (starts with `notify.mobile_app_`). We recommend creating a group for "Alarm" with all the devices you want to use.
         https://companion.home-assistant.io/docs/notifications/notifications-basic#sending-notifications-to-multiple-devices
@@ -81,7 +82,7 @@ blueprint:
         text:
     channel:
       name: (Optional) Notification Channel
-      description: >
+      description: |
         Notification channel/tag to use. Will automatically be prepended with
         "Manual " if action is triggered manually.
         https://companion.home-assistant.io/docs/notifications/notifications-basic#notification-channels
@@ -90,7 +91,7 @@ blueprint:
         text:
     color:
       name: (Optional) Notification Color
-      description: >
+      description: |
         Notification colour to use. Will automatically be prepended with
         Pink if action is triggered manually.
         https://companion.home-assistant.io/docs/notifications/notifications-basic/#notification-color
@@ -109,7 +110,7 @@ blueprint:
         text:
     time_format:
       name: (Optional) Time Format String
-      description: >
+      description: |
         Python datetime format code string for the event trigger time. This string is
         the actual time the doorbell event was triggered in case the automation or
         notification is delayed. Manual triggers will cause this to always be the time
@@ -121,7 +122,7 @@ blueprint:
 
     cooldown:
       name: (Optional) Cooldown
-      description: >
+      description: |
         Delay before sending another notification for this camera after the last event.
         Is also the interval you have to respond to actions in notification.
       default: 120
@@ -132,7 +133,7 @@ blueprint:
           unit_of_measurement: seconds
     silence_timer:
       name: (Optional) Silence Notifications
-      description: >
+      description: |
         How long to silence notifications for this camera when requested as part of the
         actionable notification. The time interval you have to respond to the slient
         action is controlled by "Cooldown". Short Cooldown timers may prevent you from
@@ -155,7 +156,7 @@ blueprint:
         text:
     debug_event_id:
       name: (Optional) Debug Event ID
-      description: >
+      description: |
         Debug Event ID for UniFi Protect to use for when manually triggering automation.
         Will be used to generate a thumbnail for testing notifications.
       default: ""
