@@ -93,6 +93,42 @@ blueprint:
       default: Smart Detection
       selector:
         text:
+    color:
+      name: (Optional) Notification Color
+      description: >
+        Notification colour to use. Will automatically be prepended with
+        Pink if action is triggered manually.
+        https://companion.home-assistant.io/docs/notifications/notifications-basic/#notification-color
+        https://companion.home-assistant.io/docs/notifications/notifications-basic/#notification-led-color
+      default: red
+      selector:
+        text:
+    notificationicon:
+      name: (Optional) Notification Icon
+      description: |
+        Icon to use for notification
+        If left blank, will use standard HA Icon.
+        This should be a URL relating to your installation or a publically accesable file ie. https://github.com/jrbconsulting/Home-Assistant/blob/main/Blueprints/automation/unifiprotect/unifi-icon.jpg
+      default: ""
+      selector:
+        text:
+    enable_google_ai_summary:
+      name: (Optional) Enable Google AI Summary
+      description: >
+        Google has a great feature where it will analyse the content of the image sent to it and present a description.
+        This is NOT local, and can be hit and miss. It may also delay notifications by an unknown amount of time.
+      default: off
+      selector:
+        boolean:
+    google_ai_summary_prompt:
+      name: Prompt to use with Google AI
+      description: |
+        This prompt will tell the Google AI what you would like to know about your images and any parameters around describing the image.
+      default: |
+        Motion has been detected, very briefly describe what you see in this image from my driveway camera. What do you think caused the motion alarm? If a person is present, describe them in detail. Don't describe stationary like objects or buildings. Your message needs to be short enough to fit in a phone notification.
+      selector:
+        text:
+          multiline: True        
     time_format:
       name: (Optional) Time Format String
       description: >
