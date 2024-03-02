@@ -255,7 +255,7 @@ condition:
 action:
   - if:
     - condition: template
-      value_template: "{{ is_state(enable_google_ai_summary, 'on') }}"
+      value_template: "{{ is_state(input_enable_google_ai_summary, 'on') }}"
     then:
       - service: google_generative_ai_conversation.generate_content
         data:
