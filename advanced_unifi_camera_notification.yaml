@@ -112,41 +112,6 @@ blueprint:
       default: "https://github.com/jrbconsulting/Advanced-Unifi-Camera-Notification/blob/main/unifi-icon.jpg"
       selector:
         text:
-    #enable_google_ai_summary:
-    #  name: (Optional) Enable Google AI Summary
-    #  description: >
-    #    Google has a great feature where it will analyse the content of the image sent to it and present a description.
-    #    This is NOT local, and can be hit and miss. It may also delay notifications by an unknown amount of time.
-    #  default: off
-    #  selector:
-    #    boolean:
-    #ai_camera_entity:
-    #  name: (Not optional if using Google AI) Camera to use snapshot for Google AI
-    #  description: |
-    #    This is the camera that you wish to use the image from to send to Google AI for summary.
-    #    This image will be processed by Googles Servers.
-    #  default: ""
-    #  selector:
-    #    entity:
-    #      domain: camera
-    #      multiple: false
-    #external_domain:
-    #  name: (Not optional if using Google AI) External HA Domain
-    #  description: |
-    #    This is the domain that you can reach your HA installation at externally - must be added on Google Generative AI portal as well (this is included in the installation of Google AI).
-    #    Must be FQDN and https. Do not include https:// ie - ha.yourdomain.remote
-    #  default: "ha.yourdomain.remote"
-    #  selector:
-    #    text:
-    #google_ai_summary_prompt:
-    #  name: Prompt to use with Google AI
-    #  description: |
-    #    This prompt will tell the Google AI what you would like to know about your images and any parameters around describing the image.
-    #  default: |
-    #    Motion has been detected, very briefly describe what you see in this image from my driveway camera. What do you think caused the motion alarm? If a person is present, describe them in detail. Don't describe stationary like objects or buildings. Your message needs to be short enough to fit in a phone notification.
-    #  selector:
-    #    text:
-    #      multiline: True        
     time_format:
       name: (Optional) Time Format String
       description: >
