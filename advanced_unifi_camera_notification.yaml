@@ -214,10 +214,10 @@ variables:
   input_time_format: !input time_format
   input_presence_filter: !input presence_filter
   input_alarm_controlpanel: !input alarm_controlpanel
-  input_enable_google_ai_summary: !input enable_google_ai_summary
-  input_ai_camera_entity: !input ai_camera_entity
-  input_external_domain: !input external_domain
-  input_google_ai_summary_prompt: !input google_ai_summary_prompt
+  #input_enable_google_ai_summary: !input enable_google_ai_summary
+  #input_ai_camera_entity: !input ai_camera_entity
+  #input_external_domain: !input external_domain
+  #input_google_ai_summary_prompt: !input google_ai_summary_prompt
   input_debug_event_id: !input debug_event_id
   input_cooldown: !input cooldown
   lovelace_view: "{{ input_lovelace_view | trim }}"
