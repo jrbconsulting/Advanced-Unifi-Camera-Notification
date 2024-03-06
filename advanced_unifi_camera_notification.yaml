@@ -179,10 +179,6 @@ variables:
   input_time_format: !input time_format
   input_presence_filter: !input presence_filter
   input_alarm_controlpanel: !input alarm_controlpanel
-  #input_enable_google_ai_summary: !input enable_google_ai_summary
-  #input_ai_camera_entity: !input ai_camera_entity
-  #input_external_domain: !input external_domain
-  #input_google_ai_summary_prompt: !input google_ai_summary_prompt
   input_debug_event_id: !input debug_event_id
   input_cooldown: !input cooldown
   lovelace_view: "{{ input_lovelace_view | trim }}"
@@ -239,28 +235,9 @@ condition:
       - "{{ not input_alarm_controlpanel or (input_alarm_controlpanel | select('is_state', 'disarmed') | list | count) == 0 }}"    
 
 action:
-  #- if:
-  #  - condition: template
-  #    #value_template: "{{ is_state(input_enable_google_ai_summary, 'on') }}"
-  #    value_template: "{{ input_enable_google_ai_summary }}"
-  #  then:
-  #    - service: camera.snapshot
-  #      data:
-  #        filename: "/www/snapshots/{{ input_ai_camera_entity }}.jpg"
-  #      target:
-  #        entity_id: "{{ input_ai_camera_entity }}"
-  #    - service: google_generative_ai_conversation.generate_content
-  #      data:
-  #        prompt: "{{ input_google_ai_summary_prompt }}"
-  #        # image_filename: "{{ ai_notification_image }}"
-  #        image_filename: "/www/snapshots/{{ input_ai_camera_entity }}.jpg"
-  #      response_variable: ai_response
-
   - service: "{{ input_notify_target_app }}"
     data:
       message: "{{ notification_message }}"
-      #message: >
-      #  "{{ notification_message }} {{ai_response['text']}}
       title: "{{ notification_title }}"
       data:
         # Android/iOS notification tag
@@ -301,8 +278,6 @@ action:
         event_type: mobile_app_notification_cleared
         event_data:
           message: "{{ notification_message }}"
-          #message: >
-          #  "{{ notification_message }} {{ai_response['text']}}
       - platform: state
         entity_id: !input obj_sensor
         to: "off"
@@ -317,8 +292,6 @@ action:
           - service: "{{ input_notify_target_app }}"
             data:
               message: "{{ notification_message }}"
-              #message: >
-              #  "{{ notification_message }} {{ai_response['text']}}
               title: >
                 {{ notification_title }}
               data:
