@@ -123,7 +123,9 @@ blueprint:
     ai_camera_entity:
       name: (Not optional if using Google AI) Camera to use snapshot for Google AI
       description: |
-        This is the camera that you wish to use the image from to send to Google AI for summary. This image will be processed by Googles Servers.
+        This is the camera that you wish to use the image from to send to Google AI for summary.
+        This image will be processed by Googles Servers.
+      default: ""
       selector:
         entity:
           domain: camera
@@ -281,14 +283,14 @@ action:
     then:
       - service: camera.snapshot
         data:
-          filename: "/config/snapshots/{{ input_ai_camera_entity }}.jpg"
+          filename: "/www/snapshots/{{ input_ai_camera_entity }}.jpg"
         target:
           entity_id: "{{ input_ai_camera_entity }}"
       - service: google_generative_ai_conversation.generate_content
         data:
           prompt: "{{ input_google_ai_summary_prompt }}"
           # image_filename: "{{ ai_notification_image }}"
-          image_filename: "/config/snapshots/{{ input_ai_camera_entity }}.jpg"
+          image_filename: "/www/snapshots/{{ input_ai_camera_entity }}.jpg"
         response_variable: ai_response
 
   - service: "{{ input_notify_target_app }}"
