@@ -240,7 +240,8 @@ variables:
   notification_tag: "{{ notification_channel.lower().replace(' ', '-') }}"
   notification_message: "{{ entity_name }}{% if trigger_time != None %} at {{ trigger_time }}{% endif %}."
   notification_image: "/api/unifiprotect/thumbnail/{{ config_entry_id(entity_id) }}/{{ event_id }}"
-  ai_notification_image: "https://{{input_external_domain}}/api/unifiprotect/thumbnail/{{ config_entry_id(entity_id) }}/{{ event_id }}"
+  #ai_notification_image: "https://{{input_external_domain}}/api/unifiprotect/thumbnail/{{ config_entry_id(entity_id) }}/{{ event_id }}"
+  ai_notification_image: "/api/unifiprotect/thumbnail/{{ config_entry_id(entity_id) }}/{{ event_id }}"
   notification_url: |
     {% if lovelace_view == "" %}
       None
