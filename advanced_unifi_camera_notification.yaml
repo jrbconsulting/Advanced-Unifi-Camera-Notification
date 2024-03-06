@@ -112,41 +112,41 @@ blueprint:
       default: "https://github.com/jrbconsulting/Advanced-Unifi-Camera-Notification/blob/main/unifi-icon.jpg"
       selector:
         text:
-    enable_google_ai_summary:
-      name: (Optional) Enable Google AI Summary
-      description: >
-        Google has a great feature where it will analyse the content of the image sent to it and present a description.
-        This is NOT local, and can be hit and miss. It may also delay notifications by an unknown amount of time.
-      default: off
-      selector:
-        boolean:
-    ai_camera_entity:
-      name: (Not optional if using Google AI) Camera to use snapshot for Google AI
-      description: |
-        This is the camera that you wish to use the image from to send to Google AI for summary.
-        This image will be processed by Googles Servers.
-      default: ""
-      selector:
-        entity:
-          domain: camera
-          multiple: false
-    external_domain:
-      name: (Not optional if using Google AI) External HA Domain
-      description: |
-        This is the domain that you can reach your HA installation at externally - must be added on Google Generative AI portal as well (this is included in the installation of Google AI).
-        Must be FQDN and https. Do not include https:// ie - ha.yourdomain.remote
-      default: "ha.yourdomain.remote"
-      selector:
-        text:
-    google_ai_summary_prompt:
-      name: Prompt to use with Google AI
-      description: |
-        This prompt will tell the Google AI what you would like to know about your images and any parameters around describing the image.
-      default: |
-        Motion has been detected, very briefly describe what you see in this image from my driveway camera. What do you think caused the motion alarm? If a person is present, describe them in detail. Don't describe stationary like objects or buildings. Your message needs to be short enough to fit in a phone notification.
-      selector:
-        text:
-          multiline: True        
+    #enable_google_ai_summary:
+    #  name: (Optional) Enable Google AI Summary
+    #  description: >
+    #    Google has a great feature where it will analyse the content of the image sent to it and present a description.
+    #    This is NOT local, and can be hit and miss. It may also delay notifications by an unknown amount of time.
+    #  default: off
+    #  selector:
+    #    boolean:
+    #ai_camera_entity:
+    #  name: (Not optional if using Google AI) Camera to use snapshot for Google AI
+    #  description: |
+    #    This is the camera that you wish to use the image from to send to Google AI for summary.
+    #    This image will be processed by Googles Servers.
+    #  default: ""
+    #  selector:
+    #    entity:
+    #      domain: camera
+    #      multiple: false
+    #external_domain:
+    #  name: (Not optional if using Google AI) External HA Domain
+    #  description: |
+    #    This is the domain that you can reach your HA installation at externally - must be added on Google Generative AI portal as well (this is included in the installation of Google AI).
+    #    Must be FQDN and https. Do not include https:// ie - ha.yourdomain.remote
+    #  default: "ha.yourdomain.remote"
+    #  selector:
+    #    text:
+    #google_ai_summary_prompt:
+    #  name: Prompt to use with Google AI
+    #  description: |
+    #    This prompt will tell the Google AI what you would like to know about your images and any parameters around describing the image.
+    #  default: |
+    #    Motion has been detected, very briefly describe what you see in this image from my driveway camera. What do you think caused the motion alarm? If a person is present, describe them in detail. Don't describe stationary like objects or buildings. Your message needs to be short enough to fit in a phone notification.
+    #  selector:
+    #    text:
+    #      multiline: True        
     time_format:
       name: (Optional) Time Format String
       description: >
@@ -251,8 +251,6 @@ variables:
   notification_tag: "{{ notification_channel.lower().replace(' ', '-') }}"
   notification_message: "{{ entity_name }}{% if trigger_time != None %} at {{ trigger_time }}{% endif %}."
   notification_image: "/api/unifiprotect/thumbnail/{{ config_entry_id(entity_id) }}/{{ event_id }}"
-  #ai_notification_image: "https://{{input_external_domain}}/api/unifiprotect/thumbnail/{{ config_entry_id(entity_id) }}/{{ event_id }}"
-  ai_notification_image: "/api/unifiprotect/thumbnail/{{ config_entry_id(entity_id) }}/{{ event_id }}"
 
   notification_url: |
     {% if lovelace_view == "" %}
@@ -276,28 +274,28 @@ condition:
       - "{{ not input_alarm_controlpanel or (input_alarm_controlpanel | select('is_state', 'disarmed') | list | count) == 0 }}"    
 
 action:
-  - if:
-    - condition: template
-      #value_template: "{{ is_state(input_enable_google_ai_summary, 'on') }}"
-      value_template: "{{ input_enable_google_ai_summary }}"
-    then:
-      - service: camera.snapshot
-        data:
-          filename: "/www/snapshots/{{ input_ai_camera_entity }}.jpg"
-        target:
-          entity_id: "{{ input_ai_camera_entity }}"
-      - service: google_generative_ai_conversation.generate_content
-        data:
-          prompt: "{{ input_google_ai_summary_prompt }}"
-          # image_filename: "{{ ai_notification_image }}"
-          image_filename: "/www/snapshots/{{ input_ai_camera_entity }}.jpg"
-        response_variable: ai_response
+  #- if:
+  #  - condition: template
+  #    #value_template: "{{ is_state(input_enable_google_ai_summary, 'on') }}"
+  #    value_template: "{{ input_enable_google_ai_summary }}"
+  #  then:
+  #    - service: camera.snapshot
+  #      data:
+  #        filename: "/www/snapshots/{{ input_ai_camera_entity }}.jpg"
+  #      target:
+  #        entity_id: "{{ input_ai_camera_entity }}"
+  #    - service: google_generative_ai_conversation.generate_content
+  #      data:
+  #        prompt: "{{ input_google_ai_summary_prompt }}"
+  #        # image_filename: "{{ ai_notification_image }}"
+  #        image_filename: "/www/snapshots/{{ input_ai_camera_entity }}.jpg"
+  #      response_variable: ai_response
 
   - service: "{{ input_notify_target_app }}"
     data:
-      #message: "{{ notification_message }}"
-      message: >
-        "{{ notification_message }} {{ai_response['text']}}
+      message: "{{ notification_message }}"
+      #message: >
+      #  "{{ notification_message }} {{ai_response['text']}}
       title: "{{ notification_title }}"
       data:
         # Android/iOS notification tag
@@ -337,9 +335,9 @@ action:
       - platform: event
         event_type: mobile_app_notification_cleared
         event_data:
-          #message: "{{ notification_message }}"
-          message: >
-            "{{ notification_message }} {{ai_response['text']}}
+          message: "{{ notification_message }}"
+          #message: >
+          #  "{{ notification_message }} {{ai_response['text']}}
       - platform: state
         entity_id: !input obj_sensor
         to: "off"
@@ -353,9 +351,9 @@ action:
         sequence:
           - service: "{{ input_notify_target_app }}"
             data:
-              #message: "{{ notification_message }}"
-              message: >
-                "{{ notification_message }} {{ai_response['text']}}
+              message: "{{ notification_message }}"
+              #message: >
+              #  "{{ notification_message }} {{ai_response['text']}}
               title: >
                 {{ notification_title }}
               data:
